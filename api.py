@@ -8,10 +8,10 @@ import traceback
 
 app = Flask(__name__)
 
-token_ubidots = os.getenv('UBIDOTS_TOKEN', 'BBUS-7c27136034b6495162e6989a04b46627163')
-label_perangkat = os.getenv('DEVICE_LABEL', 'ESP32-SIC6')
+token_ubidots = os.getenv('UBIDOTS_TOKEN', 'BBUS-TAWAdWpGJcSRtzKQgr29A75LBGRtTI')
+label_perangkat = os.getenv('DEVICE_LABEL', 'esp32-sic6')
 url_ubidots = f'https://industrial.api.ubidots.com/api/v1.6/devices/{label_perangkat}'
-uri_mongodb = os.getenv('MONGODB_URI', 'mongodb+srv://rectoversorpl:j6abIXJ0NpfuVhw@hsc478rectoverso.qluoc.mongodb.net/?retryWrites=true&w=majority&appName=HSC478Rectoverso')
+uri_mongodb = os.getenv('MONGODB_URI', 'mongodb+srv://rectoversorpl:QJhW0ZxrBTlfIa5U@hsc478rectoverso.qluoc.mongodb.net/?retryWrites=true&w=majority&appName=HSC478Rectoverso')
 nama_database = 'Rectoverso'
 nama_koleksi = 'Data'
 
