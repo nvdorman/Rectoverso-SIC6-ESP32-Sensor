@@ -1,19 +1,19 @@
 import time
 import machine
 import dht
-import urequests
+import requests
 
-dht_pin = machine.pin(4, machine.pin.in)
-pir_pin = machine.pin(15, machine.pin.in)
+dht_pin = machine.Pin(4, machine.Pin.IN)
+pir_pin = machine.Pin(15, machine.Pin.IN)
 
-dht_sensor = dht.dht11(dht_pin)
+dht_sensor = dht.DHT11(dht_pin)
 
 import network
 ssid_wifi = 'Xiaomi 13T'
 #kata_sandi_wifi = 'your_wifi_password'
 
-wlan = network.wlan(network.sta_if)
-wlan.active(true)
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
 if not wlan.isconnected():
     print('menghubungkan ke wifi...')
     wlan.connect(ssid_wifi)
@@ -30,23 +30,23 @@ def baca_dht11():
         kelembapan = dht_sensor.humidity()
         return suhu, kelembapan
     except:
-        return none, none
+        return None, None
 
 def kirim_data(suhu, kelembapan, gerakan):
-    if suhu is not none and kelembapan is not none:
+    if suhu is not None and kelembapan is not None:
         data = {
             'suhu': suhu,
             'kelembapan': kelembapan,
             'gerakan_terdeteksi': gerakan
         }
         try:
-            response = urequests.post(url_flask, json=data)
+            response = requests.post(url_flask, json=data)  # Mengganti urequests dengan requests
             print(f"data dikirim ke flask: {response.text}")
             response.close()
-        except:
-            print("error mengirim data ke flask:")
+        except Exception as e:
+            print(f"error mengirim data ke flask: {e}")
 
-while true:
+while True:
     gerakan = pir_pin.value()
     
     if gerakan == 1:
